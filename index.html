@@ -486,22 +486,20 @@ async function __main__() {
                 selected = 1;
             }
         }
-        "232";
-        print(selected);
     };
     if (!down.__module__) Object.defineProperties(down, {
         __module__ : {value: null}
     });
 
-    "235";
+    "233";
     async function moveballselect() {
-        "236";
+        "234";
         if (abs(scene.mouse.pos.x["-"](s.pos.x))["<="](1) && abs(scene.mouse.pos.y["-"](s.pos.y))["<="](1)) {
-            "237";
+            "235";
             return 0;
-            "238";
+            "236";
         } else if (abs(scene.mouse.pos.x["-"](s2.pos.x))["<="](1) && abs(scene.mouse.pos.y["-"](s2.pos.y))["<="](1)) {
-            "239";
+            "237";
             return 1;
         }
     };
@@ -509,23 +507,23 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "242";
+    "240";
     scene.bind("mousedown", down);
-    "244";
+    "242";
     dt = .01;
-    "245";
+    "243";
     (await changevelocitytext());
-    "247";
+    "245";
     async function checkiftouching() {
+        "246";
+        "247";
         "248";
-        "249";
-        "250";
         if (abs(sqrt(GS_power(abs(s.pos.x["-"](s2.pos.x)), 2)["+"](GS_power(abs(s.pos.y["-"](s2.pos.y)), 2))))["<="](2)) {
-            "251";
+            "249";
             return true;
-            "253";
+            "251";
         } else {
-            "254";
+            "252";
             return false;
         }
     };
@@ -533,30 +531,30 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "256";
+    "254";
     async function timechangetext() {
         var RS_ls, dummytext;
+        "255";
+        "256";
         "257";
-        "258";
-        "259";
         dummytext = "time(s): "["+"](str(int(time["*"](10))["/"](10)));
-        "260";
+        "258";
         timetext.text = dummytext;
     };
     if (!timechangetext.__module__) Object.defineProperties(timechangetext, {
         __module__ : {value: null}
     });
 
-    "262";
+    "260";
     async function anglefinder(top, bottom) {
         var RS_ls, opposite, theta, gamma;
-        "263";
+        "261";
         opposite = top["-"](bottom);
-        "264";
+        "262";
         theta = (await degrees(asin(opposite["/"](2))));
-        "265";
+        "263";
         gamma = 90["-"](theta);
-        "266";
+        "264";
         return [theta, gamma];
     };
     if (!anglefinder.__argnames__) Object.defineProperties(anglefinder, {
@@ -564,22 +562,22 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "268";
+    "266";
     async function samesign(one, two) {
-        "269";
+        "267";
         if ((one !== 0 && (typeof one !== "object" || RS_not_equals(one, 0))) && (two !== 0 && (typeof two !== "object" || RS_not_equals(two, 0)))) {
-            "270";
+            "268";
             if (one["/"](two)[">"](0)) {
-                "271";
+                "269";
                 return true;
-                "272";
+                "270";
             } else {
-                "273";
+                "271";
                 return false;
-                "274";
+                "272";
             }
         } else if ((one === 0 || typeof one === "object" && RS_equals(one, 0)) || (two === 0 || typeof two === "object" && RS_equals(two, 0))) {
-            "275";
+            "273";
             return false;
         }
     };
@@ -588,91 +586,91 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "277";
+    "275";
     x = s.pos.x;
-    "278";
+    "276";
     y = s.pos.y;
-    "280";
+    "278";
     x2 = s2.pos.x;
-    "281";
+    "279";
     y2 = s2.pos.y;
-    "283";
+    "281";
     scene.userzoom = false;
-    "284";
+    "282";
     scene.autoscale = false;
-    "286";
+    "284";
     while (true) {
-        "288";
+        "286";
         (await rate(ratespeed));
-        "290";
+        "288";
         if ((running === true || typeof running === "object" && RS_equals(running, true)) && RS_equals((await checkiftouching()), false)) {
-            "292";
+            "290";
             s.pos.x=s.pos.x["+"](vx["*"](dt));
-            "293";
+            "291";
             s.pos.y=s.pos.y["+"](vy["*"](dt));
-            "294";
+            "292";
             s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
-            "295";
+            "293";
             s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
-            "296";
+            "294";
             time=time["+"](ratespeed["*"](dt)["/"](100));
-            "297";
+            "295";
             (await timechangetext());
-            "299";
+            "297";
         } else if ((running === true || typeof running === "object" && RS_equals(running, true)) && RS_equals((await checkiftouching()), true)) {
-            "301";
+            "299";
             momentumx = vx["*"](mass);
-            "302";
+            "300";
             momentumy = vy["*"](mass);
-            "303";
+            "301";
             momentumx2 = vx2["*"](mass2);
-            "304";
+            "302";
             momentumy2 = vy2["*"](mass2);
-            "306";
+            "304";
             if (RS_equals((await samesign(vx, vx2)), false)) {
-                "307";
+                "305";
                 vx = momentumx2["/"](mass);
-                "308";
+                "306";
                 vx2 = momentumx["/"](mass2);
-                "309";
+                "307";
                 vy = momentumy2["/"](mass);
-                "310";
+                "308";
                 vy2 = momentumy["/"](mass2);
-                "312";
+                "310";
                 (await changevelocitytext());
-                "313";
+                "311";
                 s.pos.x=s.pos.x["+"](vx["*"](dt));
-                "314";
+                "312";
                 s.pos.y=s.pos.y["+"](vy["*"](dt));
-                "315";
+                "313";
                 s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
-                "316";
+                "314";
                 s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
-                "319";
+                "317";
             } else if (RS_equals((await samesign(vx, vx2)), true)) {
-                "320";
+                "318";
                 if (s.pos.x["<"](s2.pos.x)) {
-                    "321";
+                    "319";
                     vx = 0;
-                    "322";
+                    "320";
                     vx2 = momentumx["+"](momentumx2)["*"](mass2);
-                    "323";
+                    "321";
                 } else {
-                    "324";
+                    "322";
                     vx2 = 0;
-                    "325";
+                    "323";
                     vx = momentumx2["+"](momentumx)["*"](mass);
                 }
             }
-            "327";
+            "325";
             (await changevelocitytext());
-            "328";
+            "326";
             s.pos.x=s.pos.x["+"](vx["*"](dt));
-            "329";
+            "327";
             s.pos.y=s.pos.y["+"](vy["*"](dt));
-            "330";
+            "328";
             s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
-            "331";
+            "329";
             s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
         }
     }
