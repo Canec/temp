@@ -1,0 +1,703 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.3.0.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.3.0.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var RS_modules = {};
+var vy, vy2, velocity, velocity2, velocity_appendage, velocity2_appendage, vx, vx2, ballselect, mass, mass2, running, s, s2, time, x, x2, y, y2, vxset, vx2set, vyset, vy2set, s2set, sset, drag, timetext;
+RS_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = RS_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var RS_Iter0 = string_funcs;
+        RS_Iter0 = ((typeof RS_Iter0[Symbol.iterator] === "function") ? (RS_Iter0 instanceof Map ? RS_Iter0.keys() : RS_Iter0) : Object.keys(RS_Iter0));
+        for (var RS_Index0 of RS_Iter0) {
+            name = RS_Index0;
+            (RS_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name] = (RS_expr_temp = RS_str.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    RS_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+
+    var version, display, vector, print, arange, __name__, type, scene, RS_ls, vx, vy, vy2, vx2, ballselect, mass, mass2, running, time, pp, timetext, velocityx_appendage, velocityy_appendage, velocity_appendage, mass_appendage, reset, velocityx2_appendage, velocityy2_appendage, velocity2_appendage, mass2_appendage, men, vxinput, vyinput, massinput, xinput, yinput, ratespeed, s, s2, drag, dt, x, y, x2, y2, momentumx, momentumy, momentumx2, momentumy2;
+    version = RS_list_decorate([ "3.0", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    display = canvas;
+    vector = vec;
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    scene = canvas();
+    var strings = RS_modules.pythonize.strings;
+
+    strings();
+    "3";
+    scene = RS_interpolate_kwargs.call(this, canvas, [RS_desugar_kwargs({background: color.white, userzoom: false, autoscale: true, resizeable: false})]);
+    "4";
+    scene.autoscale = false;
+    "5";
+    vx = vy = vy2 = vx2 = 0;
+    "6";
+    ballselect = 0;
+    "7";
+    mass = mass2 = 1;
+    "8";
+    running = false;
+    "9";
+    time = 0;
+    "12";
+    async function velocityy() {
+        "13";
+        "14";
+        "15";
+        "16";
+        "17";
+        "18";
+        "20";
+        if ((ballselect === 0 || typeof ballselect === "object" && RS_equals(ballselect, 0))) {
+            "21";
+            vy = vyinput.number;
+            "22";
+            vyinput.text = "";
+            "23";
+        } else if ((ballselect === 1 || typeof ballselect === "object" && RS_equals(ballselect, 1))) {
+            "24";
+            vy2 = vyinput.number;
+            "25";
+            vyinput.text = "";
+        }
+        "26";
+        (await changevelocitytext());
+    };
+    if (!velocityy.__module__) Object.defineProperties(velocityy, {
+        __module__ : {value: null}
+    });
+
+    "28";
+    async function resetbutt() {
+        "29";
+        "30";
+        "31";
+        "32";
+        "33";
+        "34";
+        "35";
+        "36";
+        "37";
+        "38";
+        "39";
+        "40";
+        vx = vy = vx2 = vy2 = 0;
+        "41";
+        s.pos = vector(1["-u"](), 0, 0);
+        "42";
+        s2.pos = vector(2, 0, 0);
+        "43";
+        running = false;
+        "44";
+        (await changevelocitytext());
+        "45";
+        time = 0;
+        "46";
+        (await timechangetext());
+    };
+    if (!resetbutt.__module__) Object.defineProperties(resetbutt, {
+        __module__ : {value: null}
+    });
+
+    "48";
+    async function autozoombind() {
+        "49";
+        if (checkbox.checked) {
+            "50";
+            scene.userzoom = false;
+            "51";
+        } else if (checkbox.checked) {
+            "52";
+            scene.userzoom = true;
+        }
+    };
+    if (!autozoombind.__module__) Object.defineProperties(autozoombind, {
+        __module__ : {value: null}
+    });
+
+    "54";
+    async function xloc() {
+        "55";
+        "56";
+        "57";
+        if ((ballselect === 0 || typeof ballselect === "object" && RS_equals(ballselect, 0))) {
+            "58";
+            x = xinput.number;
+            "59";
+        } else if ((ballselect === 1 || typeof ballselect === "object" && RS_equals(ballselect, 1))) {
+            "60";
+            x2 = xinput.number;
+        }
+        "61";
+        (await changelocation());
+        "62";
+        xinput.text = "";
+    };
+    if (!xloc.__module__) Object.defineProperties(xloc, {
+        __module__ : {value: null}
+    });
+
+    "64";
+    async function yloc() {
+        "65";
+        "66";
+        "67";
+        if ((ballselect === 0 || typeof ballselect === "object" && RS_equals(ballselect, 0))) {
+            "68";
+            y = yinput.number;
+            "69";
+        } else if ((ballselect === 1 || typeof ballselect === "object" && RS_equals(ballselect, 1))) {
+            "70";
+            y2 = yinput.number;
+        }
+        "71";
+        (await changelocation());
+        "72";
+        yinput.text = "";
+    };
+    if (!yloc.__module__) Object.defineProperties(yloc, {
+        __module__ : {value: null}
+    });
+
+    "73";
+    async function changelocation() {
+        "74";
+        s.pos = vector(x, y, 0);
+        "75";
+        s2.pos = vector(x2, y2, 0);
+    };
+    if (!changelocation.__module__) Object.defineProperties(changelocation, {
+        __module__ : {value: null}
+    });
+
+    "77";
+    async function velocityx() {
+        "79";
+        "80";
+        "81";
+        "82";
+        "83";
+        "84";
+        "85";
+        if ((ballselect === 0 || typeof ballselect === "object" && RS_equals(ballselect, 0))) {
+            "86";
+            vx = vxinput.number;
+            "87";
+            vxinput.text = "";
+            "88";
+        } else if ((ballselect === 1 || typeof ballselect === "object" && RS_equals(ballselect, 1))) {
+            "89";
+            vx2 = vxinput.number;
+            "90";
+            vxinput.text = "";
+        }
+        "91";
+        (await changevelocitytext());
+    };
+    if (!velocityx.__module__) Object.defineProperties(velocityx, {
+        __module__ : {value: null}
+    });
+
+    "93";
+    async function changevelocitytext() {
+        var RS_ls, dummytext;
+        "94";
+        "95";
+        "96";
+        "97";
+        "98";
+        "99";
+        "100";
+        dummytext = "(2|Vx):"["+"](str(vx2));
+        "101";
+        velocityx2_appendage.text = dummytext;
+        "102";
+        velocity2 = sqrt(GS_power(vx2, 2)["+"](GS_power(vy2, 2)));
+        "103";
+        dummytext = "(2|V):"["+"](str(int(1e3["*"](velocity2))["/"](1e3)));
+        "104";
+        velocity2_appendage.text = dummytext;
+        "105";
+        dummytext = "(Vx):"["+"](str(vx));
+        "106";
+        velocityx_appendage.text = dummytext;
+        "107";
+        velocity = sqrt(GS_power(vx, 2)["+"](GS_power(vy, 2)));
+        "108";
+        dummytext = "(V):"["+"](str(velocity));
+        "109";
+        velocity_appendage.text = dummytext;
+        "110";
+        dummytext = "(2|Vy): "["+"](str(vy2));
+        "111";
+        velocityy2_appendage.text = dummytext;
+        "112";
+        velocity2 = sqrt(GS_power(vx2, 2)["+"](GS_power(vy2, 2)));
+        "113";
+        dummytext = "(2|V):"["+"](str(velocity2));
+        "114";
+        velocity2_appendage.text = dummytext;
+        "115";
+        dummytext = "(Vy): "["+"](str(vy));
+        "116";
+        velocityy_appendage.text = dummytext;
+        "117";
+        velocity = sqrt(GS_power(vx, 2)["+"](GS_power(vy, 2)));
+        "118";
+        dummytext = "(V):"["+"](str(int(1e3["*"](velocity))["/"](1e3)));
+        "119";
+        velocity_appendage.text = dummytext;
+        "120";
+        dummytext = "(Mass):"["+"](str(mass));
+        "121";
+        mass_appendage.text = dummytext;
+        "122";
+        dummytext = "(2|Mass):"["+"](str(mass2));
+        "123";
+        mass2_appendage.text = dummytext;
+    };
+    if (!changevelocitytext.__module__) Object.defineProperties(changevelocitytext, {
+        __module__ : {value: null}
+    });
+
+    "125";
+    async function M() {
+        "126";
+        "127";
+        ballselect = men.index;
+    };
+    if (!M.__module__) Object.defineProperties(M, {
+        __module__ : {value: null}
+    });
+
+    "129";
+    async function massfunc() {
+        "130";
+        "131";
+        "132";
+        if ((ballselect === 0 || typeof ballselect === "object" && RS_equals(ballselect, 0))) {
+            "133";
+            mass = massinput.number;
+            "134";
+            massinput.text = "";
+            "135";
+        }
+        if ((ballselect === 1 || typeof ballselect === "object" && RS_equals(ballselect, 1))) {
+            "136";
+            mass2 = massinput.number;
+            "137";
+            massinput.text = "";
+        }
+        "139";
+        (await changevelocitytext());
+    };
+    if (!massfunc.__module__) Object.defineProperties(massfunc, {
+        __module__ : {value: null}
+    });
+
+    "141";
+    async function ppbutt() {
+        "142";
+        "143";
+        "144";
+        "145";
+        "146";
+        "147";
+        "148";
+        "149";
+        "150";
+        "151";
+        "152";
+        "153";
+        "154";
+        "156";
+        if ((running === false || typeof running === "object" && RS_equals(running, false))) {
+            "157";
+            running = true;
+            "158";
+        } else if ((running === true || typeof running === "object" && RS_equals(running, true))) {
+            "159";
+            running = false;
+        }
+    };
+    if (!ppbutt.__module__) Object.defineProperties(ppbutt, {
+        __module__ : {value: null}
+    });
+
+    "161";
+    pp = RS_interpolate_kwargs.call(this, button, [RS_desugar_kwargs({text: "Play/Pause", bind: ppbutt})]);
+    "162";
+    timetext = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "time(s): "})]);
+    "163";
+    scene.append_to_caption("                                                     ");
+    "164";
+    velocityx_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(Vx): "})]);
+    "165";
+    scene.append_to_caption(" ");
+    "167";
+    velocityy_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(Vy): "})]);
+    "168";
+    scene.append_to_caption(" ");
+    "170";
+    velocity_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(V): "})]);
+    "171";
+    scene.append_to_caption(" ");
+    "172";
+    mass_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(Mass): "})]);
+    "173";
+    scene.append_to_caption("\n");
+    "174";
+    reset = RS_interpolate_kwargs.call(this, button, [RS_desugar_kwargs({text: "Reset", bind: resetbutt})]);
+    "176";
+    scene.append_to_caption("                                                               ");
+    "177";
+    velocityx2_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(2|Vx): "})]);
+    "178";
+    scene.append_to_caption(" ");
+    "180";
+    velocityy2_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(2|Vy): "})]);
+    "181";
+    scene.append_to_caption(" ");
+    "183";
+    velocity2_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(2|V): "})]);
+    "184";
+    scene.append_to_caption(" ");
+    "185";
+    mass2_appendage = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "(2|Mass): "})]);
+    "187";
+    scene.append_to_caption("\n\n");
+    "188";
+    men = RS_interpolate_kwargs.call(this, menu, [RS_desugar_kwargs({choices: RS_list_decorate([ "Ball 1 (Red)", "Ball 2 (Orange)" ]), bind: M})]);
+    "189";
+    scene.append_to_caption("Vx: ");
+    (await sleep(.1));
+    "190";
+    vxinput = RS_interpolate_kwargs.call(this, winput, [RS_desugar_kwargs({bind: velocityx, type: "numeric"})]);
+    "191";
+    scene.append_to_caption("      ");
+    "192";
+    scene.append_to_caption("Vy: ");
+    (await sleep(.1));
+    "193";
+    vyinput = RS_interpolate_kwargs.call(this, winput, [RS_desugar_kwargs({bind: velocityy, type: "numeric"})]);
+    "194";
+    scene.append_to_caption("      ");
+    "195";
+    scene.append_to_caption("Mass: ");
+    (await sleep(.1));
+    "196";
+    massinput = RS_interpolate_kwargs.call(this, winput, [RS_desugar_kwargs({bind: massfunc, type: "numeric"})]);
+    "197";
+    scene.append_to_caption("\n\n");
+    "198";
+    scene.append_to_caption("x: ");
+    (await sleep(.1));
+    "199";
+    xinput = RS_interpolate_kwargs.call(this, winput, [RS_desugar_kwargs({bind: xloc, type: "numeric"})]);
+    "200";
+    scene.append_to_caption("      ");
+    "201";
+    scene.append_to_caption("y: ");
+    (await sleep(.1));
+    "202";
+    yinput = RS_interpolate_kwargs.call(this, winput, [RS_desugar_kwargs({bind: yloc, type: "numeric"})]);
+    "208";
+    ratespeed = 100;
+    "209";
+    s = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(1["-u"](), 0, 0), color: color.red})]);
+    "210";
+    s2 = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(2, 0, 0), color: color.orange})]);
+    "212";
+    drag = false;
+    "213";
+    async function down() {
+        "214";
+        "215";
+        drag = true;
+        "216";
+        if ((running === false || typeof running === "object" && RS_equals(running, false))) {
+            "217";
+            if (RS_equals((await moveballselect()), 0)) {
+                "218";
+                s.color = color.cyan;
+                "219";
+            } else if (RS_equals((await moveballselect()), 1)) {
+                "220";
+                s2.color = color.cyan;
+            }
+        }
+    };
+    if (!down.__module__) Object.defineProperties(down, {
+        __module__ : {value: null}
+    });
+
+    "222";
+    async function moveballselect() {
+        "223";
+        if (abs(scene.mouse.pos.x["-"](s.pos.x))["<="](2) && abs(scene.mouse.pos.y["-"](s.pos.y))["<="](2)) {
+            "224";
+            return 0;
+            "225";
+        } else if (abs(scene.mouse.pos.x["-"](s2.pos.x))["<="](2) && abs(scene.mouse.pos.y["-"](s2.pos.y))["<="](2)) {
+            "226";
+            return 1;
+        }
+    };
+    if (!moveballselect.__module__) Object.defineProperties(moveballselect, {
+        __module__ : {value: null}
+    });
+
+    "228";
+    async function move() {
+        "229";
+        "230";
+        if (drag && (running === false || typeof running === "object" && RS_equals(running, false))) {
+            "231";
+            if ((s.color === color.cyan || typeof s.color === "object" && RS_equals(s.color, color.cyan))) {
+                "232";
+                s.pos = scene.mouse.pos;
+                "233";
+            } else if ((s2.color === color.cyan || typeof s2.color === "object" && RS_equals(s2.color, color.cyan))) {
+                "234";
+                s2.pos = scene.mouse.pos;
+            }
+        }
+    };
+    if (!move.__module__) Object.defineProperties(move, {
+        __module__ : {value: null}
+    });
+
+    "236";
+    async function up() {
+        "237";
+        "238";
+        drag = false;
+        "239";
+        s.color = color.red;
+        "240";
+        s2.color = color.orange;
+    };
+    if (!up.__module__) Object.defineProperties(up, {
+        __module__ : {value: null}
+    });
+
+    "242";
+    scene.bind("mousedown", down);
+    "244";
+    scene.bind("mousemove", move);
+    "246";
+    scene.bind("mouseup", up);
+    "248";
+    scene.userzoom = false;
+    "249";
+    scene.autoscale = false;
+    "251";
+    dt = .01;
+    "252";
+    (await changevelocitytext());
+    "254";
+    async function checkiftouching() {
+        "255";
+        "256";
+        "257";
+        if (abs(sqrt(GS_power(abs(s.pos.x["-"](s2.pos.x)), 2)["+"](GS_power(abs(s.pos.y["-"](s2.pos.y)), 2))))["<="](2)) {
+            "258";
+            return true;
+            "260";
+        } else {
+            "261";
+            return false;
+        }
+    };
+    if (!checkiftouching.__module__) Object.defineProperties(checkiftouching, {
+        __module__ : {value: null}
+    });
+
+    "263";
+    async function timechangetext() {
+        var RS_ls, dummytext;
+        "264";
+        "265";
+        "266";
+        dummytext = "time(s): "["+"](str(int(time["*"](10))["/"](10)));
+        "267";
+        timetext.text = dummytext;
+    };
+    if (!timechangetext.__module__) Object.defineProperties(timechangetext, {
+        __module__ : {value: null}
+    });
+
+    "269";
+    async function anglefinder(top, bottom) {
+        var RS_ls, opposite, theta, gamma;
+        "270";
+        opposite = top["-"](bottom);
+        "271";
+        theta = (await degrees(asin(opposite["/"](2))));
+        "272";
+        gamma = 90["-"](theta);
+        "273";
+        return [theta, gamma];
+    };
+    if (!anglefinder.__argnames__) Object.defineProperties(anglefinder, {
+        __argnames__ : {value: ["top", "bottom"]},
+        __module__ : {value: null}
+    });
+
+    "275";
+    async function samesign(one, two) {
+        "276";
+        if ((one !== 0 && (typeof one !== "object" || RS_not_equals(one, 0))) && (two !== 0 && (typeof two !== "object" || RS_not_equals(two, 0)))) {
+            "277";
+            if (one["/"](two)[">"](0)) {
+                "278";
+                return true;
+                "279";
+            } else {
+                "280";
+                return false;
+                "281";
+            }
+        } else if ((one === 0 || typeof one === "object" && RS_equals(one, 0)) || (two === 0 || typeof two === "object" && RS_equals(two, 0))) {
+            "282";
+            return false;
+        }
+    };
+    if (!samesign.__argnames__) Object.defineProperties(samesign, {
+        __argnames__ : {value: ["one", "two"]},
+        __module__ : {value: null}
+    });
+
+    "284";
+    x = s.pos.x;
+    "285";
+    y = s.pos.y;
+    "287";
+    x2 = s2.pos.x;
+    "288";
+    y2 = s2.pos.y;
+    "290";
+    while (true) {
+        "292";
+        (await rate(ratespeed));
+        "294";
+        if ((running === true || typeof running === "object" && RS_equals(running, true)) && RS_equals((await checkiftouching()), false)) {
+            "296";
+            s.pos.x=s.pos.x["+"](vx["*"](dt));
+            "297";
+            s.pos.y=s.pos.y["+"](vy["*"](dt));
+            "298";
+            s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
+            "299";
+            s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
+            "300";
+            time=time["+"](ratespeed["*"](dt)["/"](100));
+            "301";
+            (await timechangetext());
+            "303";
+        } else if ((running === true || typeof running === "object" && RS_equals(running, true)) && RS_equals((await checkiftouching()), true)) {
+            "305";
+            momentumx = vx["*"](mass);
+            "306";
+            momentumy = vy["*"](mass);
+            "307";
+            momentumx2 = vx2["*"](mass2);
+            "308";
+            momentumy2 = vy2["*"](mass2);
+            "310";
+            if (RS_equals((await samesign(vx, vx2)), false)) {
+                "311";
+                vx = momentumx2["/"](mass);
+                "312";
+                vx2 = momentumx["/"](mass2);
+                "313";
+                vy = momentumy2["/"](mass);
+                "314";
+                vy2 = momentumy["/"](mass2);
+                "316";
+                (await changevelocitytext());
+                "317";
+                s.pos.x=s.pos.x["+"](vx["*"](dt));
+                "318";
+                s.pos.y=s.pos.y["+"](vy["*"](dt));
+                "319";
+                s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
+                "320";
+                s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
+                "323";
+            } else if (RS_equals((await samesign(vx, vx2)), true)) {
+                "324";
+                if (s.pos.x["<"](s2.pos.x)) {
+                    "325";
+                    vx = 0;
+                    "326";
+                    vx2 = momentumx["+"](momentumx2)["*"](mass2);
+                    "327";
+                } else {
+                    "328";
+                    vx2 = 0;
+                    "329";
+                    vx = momentumx2["+"](momentumx)["*"](mass);
+                }
+            }
+            "331";
+            (await changevelocitytext());
+            "332";
+            s.pos.x=s.pos.x["+"](vx["*"](dt));
+            "333";
+            s.pos.y=s.pos.y["+"](vy["*"](dt));
+            "334";
+            s2.pos.y=s2.pos.y["+"](vy2["*"](dt));
+            "335";
+            s2.pos.x=s2.pos.x["+"](vx2["*"](dt));
+        }
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
