@@ -48,7 +48,7 @@ RS_modules.pythonize = {};
 async function __main__() {
 "use strict";
 
-    var version, display, vector, print, arange, __name__, type, scene, RS_ls, rg, proton1, proton2, proton3, proton4, disk, rod, pointer, pointer2, pointer3, pointer4, pointer5, pointer6, gamma, acc, v, differential, right;
+    var version, display, vector, print, arange, __name__, type, scene, RS_ls, rg, proton1, proton2, proton3, proton4, disk, rod, pointer, pointer2, pointer3, pointer4, pointer5, pointer6, gamma, gammachange, acc, v, differential, right;
     version = RS_list_decorate([ "3.0", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
@@ -94,73 +94,81 @@ async function __main__() {
     "22";
     gamma = .06;
     "23";
-    acc = 20;
+    gammachange = 35e-5["-"](116279e-11);
     "24";
-    v = 0;
+    acc = 20;
     "25";
+    v = 0;
+    "26";
     differential = .01;
-    "27";
-    scene.background = color.green;
     "28";
-    scene.autoscale = false;
+    scene.background = color.green;
     "29";
-    scene.range = 50;
+    scene.autoscale = false;
     "30";
+    scene.range = 50;
+    "31";
     right = true;
-    "32";
+    "33";
     while (true) {
-        "33";
-        (await rate(60));
         "34";
+        (await rate(60));
+        "35";
         RS_interpolate_kwargs.call(disk, disk.rotate, [RS_desugar_kwargs({angle: gamma, axis: vector(1, 0, 0)})]);
-        "36";
+        "37";
         if ((right === true || typeof right === "object" && RS_equals(right, true))) {
-            "38";
+            "39";
             if (gamma["<="](.06["-u"]())) {
-                "39";
+                "40";
                 right = false;
                 "41";
-            } else if (gamma[">"](0)) {
+                gamma = .06["-u"]();
                 "43";
-                gamma = gamma["-"](35e-5);
-                "44";
-                v = v["+"](acc["*"](differential));
+            } else if (gamma[">"](0)) {
                 "45";
-                disk.pos.x=disk.pos.x["+"](v["*"](differential));
-                "47";
-            } else if (gamma["<"](0) && gamma[">"](.06["-u"]())) {
-                "49";
-                acc = 20["-u"]();
-                "50";
-                gamma = gamma["-"](35e-5);
-                "51";
+                gamma = gamma["-"](gammachange);
+                "46";
                 v = v["+"](acc["*"](differential));
-                "52";
+                "47";
                 disk.pos.x=disk.pos.x["+"](v["*"](differential));
+                "49";
+            } else if (gamma["<"](0) && gamma[">"](.06["-u"]())) {
+                "51";
+                acc = 20["-u"]();
+                "52";
+                gamma = gamma["-"](gammachange);
+                "53";
+                v = v["+"](acc["*"](differential));
                 "54";
+                disk.pos.x=disk.pos.x["+"](v["*"](differential));
+                "56";
             }
         } else if ((right === false || typeof right === "object" && RS_equals(right, false))) {
-            "56";
+            "58";
             if (gamma[">="](.06)) {
-                "57";
-                right = true;
                 "59";
-            } else if (gamma["<"](0)) {
+                right = true;
+                "60";
+                gamma = .06;
                 "61";
-                gamma = gamma["+"](35e-5);
-                "62";
-                v = v["+"](acc["*"](differential));
+                disk.pos.x = 5["-u"]();
                 "63";
-                disk.pos.x=disk.pos.x["+"](v["*"](differential));
+            } else if (gamma["<"](0)) {
                 "65";
-            } else if (gamma[">"](0) && gamma["<"](.06)) {
-                "67";
-                acc = 20;
-                "68";
-                gamma = gamma["+"](35e-5);
-                "69";
+                gamma = gamma["+"](gammachange);
+                "66";
                 v = v["+"](acc["*"](differential));
-                "70";
+                "67";
+                disk.pos.x=disk.pos.x["+"](v["*"](differential));
+                "69";
+            } else if (gamma[">"](0) && gamma["<"](.06)) {
+                "71";
+                acc = 20;
+                "72";
+                gamma = gamma["+"](gammachange);
+                "73";
+                v = v["+"](acc["*"](differential));
+                "74";
                 disk.pos.x=disk.pos.x["+"](v["*"](differential));
             }
         }
