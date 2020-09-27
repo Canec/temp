@@ -298,7 +298,7 @@ RS_modules.pythonize = {};
 async function __main__() {
 "use strict";
 
-    var version, display, vector, print, arange, __name__, type, scene, RS_ls, rg, proton1, proton2, proton3, proton4, disk, rod, pointer, pointer2, pointer3, pointer4, pointer5, pointer6, gamma, gammachange, acc, v, differential, right;
+    var version, display, vector, print, arange, __name__, type, scene, RS_ls, rg, proton1, proton2, proton3, proton4, disk, rod, pointer, pointer6, gamma, gammachange, acc, v, differential, right;
     version = RS_list_decorate([ "3.0", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
@@ -326,99 +326,91 @@ async function __main__() {
     "9";
     disk = compound(RS_list_decorate([ rg, proton1, proton2, proton3, proton4 ]));
     "10";
-    disk.pos.x = 5["-u"]();
+    disk.pos.x = 30["-u"]();
     "12";
-    rod = RS_interpolate_kwargs.call(this, cylinder, [RS_desugar_kwargs({length: 65, color: color.black, radius: .5, pos: vector(6["-u"](), 0, 0)})]);
+    rod = RS_interpolate_kwargs.call(this, cylinder, [RS_desugar_kwargs({length: 65, color: color.black, radius: .5, pos: vector(31["-u"](), 0, 0)})]);
     "14";
-    pointer = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(0, 12, 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
-    "15";
-    pointer2 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(5, 12, 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
-    "16";
-    pointer3 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(10, 12, 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
-    "18";
-    pointer4 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(0, 12["-u"](), 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
+    pointer = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(0, 12, 1), axis: vector(5["-u"](), 0, 0), shaftwidth: 1})]);
+    "17";
+    pointer6 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(0, 12["-u"](), 1), axis: vector(5["-u"](), 0, 0), shaftwidth: 1})]);
     "19";
-    pointer5 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(5, 12["-u"](), 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
-    "20";
-    pointer6 = RS_interpolate_kwargs.call(this, arrow, [RS_desugar_kwargs({pos: vector(10, 12["-u"](), 1), axis: vector(0, 0, 5), shaftwidth: 1})]);
-    "22";
     gamma = .06;
-    "23";
+    "20";
     gammachange = 35e-5["-"](116279e-11);
-    "24";
+    "21";
     acc = 20;
-    "25";
+    "22";
     v = 0;
-    "26";
+    "23";
     differential = .01;
-    "28";
+    "25";
     scene.background = color.green;
-    "29";
+    "26";
     scene.autoscale = false;
-    "30";
+    "27";
     scene.range = 50;
-    "31";
+    "28";
     right = true;
-    "33";
+    "30";
     while (true) {
-        "34";
+        "31";
         (await rate(60));
-        "35";
+        "32";
         RS_interpolate_kwargs.call(disk, disk.rotate, [RS_desugar_kwargs({angle: gamma, axis: vector(1, 0, 0)})]);
-        "37";
+        "34";
         if ((right === true || typeof right === "object" && RS_equals(right, true))) {
-            "39";
+            "36";
             if (gamma["<="](.06["-u"]())) {
-                "40";
+                "37";
                 right = false;
-                "41";
+                "38";
                 gamma = .06["-u"]();
-                "43";
+                "40";
             } else if (gamma[">"](0)) {
-                "45";
+                "42";
                 gamma = gamma["-"](gammachange);
+                "43";
+                v = v["+"](acc["*"](differential));
+                "44";
+                disk.pos.x=disk.pos.x["+"](v["*"](differential));
                 "46";
-                v = v["+"](acc["*"](differential));
-                "47";
-                disk.pos.x=disk.pos.x["+"](v["*"](differential));
-                "49";
             } else if (gamma["<"](0) && gamma[">"](.06["-u"]())) {
-                "51";
+                "48";
                 acc = 20["-u"]();
-                "52";
+                "49";
                 gamma = gamma["-"](gammachange);
-                "53";
+                "50";
                 v = v["+"](acc["*"](differential));
-                "54";
+                "51";
                 disk.pos.x=disk.pos.x["+"](v["*"](differential));
-                "56";
+                "53";
             }
         } else if ((right === false || typeof right === "object" && RS_equals(right, false))) {
-            "58";
+            "55";
             if (gamma[">="](.06)) {
-                "59";
+                "56";
                 right = true;
-                "60";
+                "57";
                 gamma = .06;
-                "61";
-                disk.pos.x = 5["-u"]();
-                "63";
+                "58";
+                disk.pos.x = 30["-u"]();
+                "60";
             } else if (gamma["<"](0)) {
-                "65";
+                "62";
                 gamma = gamma["+"](gammachange);
-                "66";
+                "63";
                 v = v["+"](acc["*"](differential));
-                "67";
+                "64";
                 disk.pos.x=disk.pos.x["+"](v["*"](differential));
-                "69";
+                "66";
             } else if (gamma[">"](0) && gamma["<"](.06)) {
-                "71";
+                "68";
                 acc = 20;
-                "72";
+                "69";
                 gamma = gamma["+"](gammachange);
-                "73";
+                "70";
                 v = v["+"](acc["*"](differential));
-                "74";
+                "71";
                 disk.pos.x=disk.pos.x["+"](v["*"](differential));
             }
         }
